@@ -1,0 +1,63 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <div class="flex flex-col items-center m-4">
+    <select
+      class="m-4 border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">>
+      <option [value]="">Choose</option>
+      <ng-container *ngFor="let game of gameList;">
+        <option [value]="game.id">{{game.name}}</option>
+      </ng-container>
+    </select>
+
+    <input formControlName="word_en" type="text" placeholder="Enter a search word"
+           class="m-4 border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+           value=""/>
+
+    <button [disabled]="!searchForm.valid"
+            class="disabled:opacity-50 bg-green-600 text-white active:bg-green-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            type="submit">
+      Search
+    </button>
+  </div>
+</form>
+
+
+<div class="flex flex-col">
+  <div *ngFor="let word of wordList;"
+       class="bg-gray-900 border border-gray-900 shadow-lg rounded-3xl p-4 m-4">
+    <div class="flex-none sm:flex">
+      <div class=" relative h-32 w-32 sm:mb-0 mb-3">
+        <img
+          src="http://127.0.0.1:8000{{word.image}}"
+          alt="aji" class=" w-32 h-32 object-cover rounded-2xl">
+      </div>
+      <div class="flex-auto sm:ml-5 justify-evenly">
+        <div class="flex items-center justify-between sm:mt-2">
+          <div class="flex items-center">
+            <div class="flex flex-col">
+              <div
+                class="w-full flex-none text-lg text-gray-200 font-bold leading-none">{{word.game.name}}</div>
+              <div class="flex-auto text-gray-400 my-1">
+                <span class="mr-3">EN</span>
+                <span
+                  class="mr-3 border-r border-gray-600  max-h-0"></span><span>{{word.word_en}}</span>
+                <div class="flex-auto text-gray-400 my-1">
+                  <span class="mr-3">RU</span>
+                  <span
+                    class="mr-3 border-r border-gray-600  max-h-0"></span><span>{{word.word_ru}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-row-reverse ">
+          <button class="flex-no-shrink bg-green-400 hover:bg-green-500 px-5 ml-4 py-2 text-xs shadow-sm hover:shadow-lg font-medium
+            tracking-wider border-2 border-green-300 hover:border-green-500 text-white rounded-full transition ease-in duration-300">
+            More
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
